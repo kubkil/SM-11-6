@@ -1,0 +1,23 @@
+{
+  "name": "SM_11_6",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "init": "npm-run-all -s init:*",
+    "init:folders": "mkdir sass css js images",
+    "init:files": "touch index.html sass/style.scss css/style.css js/script.js",
+    "init:gitignore": "curl https://raw.githubusercontent.com/github/gitignore/master/Node.gitignore -o .gitignore",
+    "watch": "npm-run-all -p watch:*",
+    "watch:sass": "sass --watch sass:css",
+    "watch:bs": "browser-sync start --server --files css/*.css *.html --browser chrome"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "browser-sync": "^2.23.6",
+    "node-sass": "^4.7.2",
+    "npm-run-all": "^4.1.2"
+  }
+}
