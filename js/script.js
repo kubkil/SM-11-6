@@ -38,6 +38,15 @@ $(function() {
     $columnAddCard.click(function() {
       self.addCard(new Card(prompt('Enter the name of the card')));
     });
+
+    // APPEND COLUMN ELEMENTS
+    $column.append($columnTitle);
+    $column.append($columnAddCard);
+    $column.append($columnDelete);
+    $column.append($columnCardList);
+
+    // RETURN CREATED COLUMN
+    return $column;
   }
 
 }) // END $(document).ready()
