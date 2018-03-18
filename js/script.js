@@ -98,4 +98,11 @@ $(function() {
     }).disableSelection();
   }
 
+  // EVENT ON .create-column
+  $('.create-column').click(function() {
+    let name = prompt('Enter column name'); // or const?
+    let column = new Column(name);
+    board.addColumn(column); // ?
+  });
+
 }); // END $(document).ready()
