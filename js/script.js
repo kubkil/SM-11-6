@@ -75,4 +75,9 @@ $(function() {
     }
   }
 
+  // CARD PROTOTYPE
+  Card.prototype.removeCard = function() {
+    this.$element.remove();
+  }
+
 }); // END $(document).ready()
