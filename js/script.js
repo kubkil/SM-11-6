@@ -21,7 +21,7 @@ $(function() {
     // CREATE COLUMN FUNCTION
     function createColumn() {
       // COLUMN ELEMENTS
-      const $column = $('<div>').addClass('column'); // TWORZY PUSTY DIV O KLASIE 'column'? NIE POTRZEBNE ZAMKNIĘCIE?
+      const $column = $('<div>').addClass('column'); // TWORZY PUSTY DIV O KLASIE 'column'? NIE POTRZEBNE ZAMKNIĘCIE <>? ZNAK $ PRZED NAZWĄ ZMIENNEJ W CELU OZNACZENIA ZMIENNEJ TRZYMAJĄCEJ ELEMENT JQUERY
       const $columnTitle = $('<h2>').addClass('column-title').text(self.name);
       const $columnCardList = $('<ul>').addClass('column-card-list');
       const $columnDelete = $('<button>').addClass('btn-delete').text('X');
@@ -35,9 +35,9 @@ $(function() {
         self.addCard(new Card(prompt('Enter the name of the card')));
       });
       // APPEND COLUMN ELEMENTS
-      $column.append($columnTitle);
-      $column.append($columnAddCard);
+      $column.append($columnTitle); //O CO CHODZI W KODZIE Z INSTRUKCJI W TYM FRAGMENCIE?
       $column.append($columnDelete);
+      $column.append($columnAddCard);
       $column.append($columnCardList);
       // RETURN CREATED COLUMN
       return $column;
@@ -55,7 +55,7 @@ $(function() {
 
   //CARD CONSTRUCTOR
   function Card(description) {
-    const self = this;
+    let self = this; // or const?
     this.id = randomString();
     this.description = description;
     this.$element = createCard();
