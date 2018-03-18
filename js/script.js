@@ -80,4 +80,22 @@ $(function() {
     this.$element.remove();
   }
 
+  // BOARD OBJECT
+  const board = {
+    name: 'Kanban Board',
+    addColumn: function(column) {
+      this.$element.append(column.$element);
+      initSortable();
+    },
+    $element: $('#board .column-container')
+  };
+
+  // FUNCTION SORTABLE
+  function initSortable() {
+    $('.column-card-list').sortable({
+      connectWith: '.column-card-list',
+      placeholder: 'card-placeholder'
+    }).disableSelection();
+  }
+
 }); // END $(document).ready()
