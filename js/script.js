@@ -19,11 +19,11 @@ $(function() {
   }
 
   // COLUMN PROTOTYPES
-  Column.prototype.addCard = function (card) {
+  Column.prototype.addCard = function(card) {
     this.$element.children('ul').append(card.$element);
   }
 
-  Column.prototype.removeColumn = function () {
+  Column.prototype.removeColumn = function() {
     this.$element.remove();
   }
 
@@ -50,6 +50,29 @@ $(function() {
     $column.append($columnCardList);
     // RETURN CREATED COLUMN
     return $column;
+  }
+
+  //CARD CONSTRUCTOR
+  function Card(description) {
+    const self = this;
+    this.id = randomString();
+    this.description = description;
+    this.$element = createCard();
+    // CREATE CARD
+    function createCard() {
+      const $card = $('<li>').addClass('card');
+      const $cardDescription = $('<p>').addClass('card-description').text(self.description);
+      const $cardDelete = $('<button>').addClass('btn-delete').text('X');
+      // REMOVE CARD EVENT
+      $cardDelete.click(function() {
+        self.removeCard();
+      });
+      // APPEND CARD ELEMENTS
+      $card.append($cardDelete);
+      $card.append($cardDescription);
+      // RETURN CREATED CARD
+      return $card;
+    }
   }
 
 }); // END $(document).ready()
