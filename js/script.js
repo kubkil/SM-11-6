@@ -1,5 +1,7 @@
 $(function() {
 
+  'use strict';
+
   //ID GENERATOR
   function randomString() {
     const chars = '0123456789abcdefghiklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXTZ';
