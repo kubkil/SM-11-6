@@ -21,11 +21,23 @@ $(function() {
 
   // CREATE COLUMN FUNCTION
   function createColumn() {
+
+    // COLUMN ELEMENTS
     const $column = $('<div>').addClass('column');
     const $columnTitle = $('<h2>').addClass('column-title').text(self.name);
     const $columnCardList = $('<ul>').addClass('column-card-list');
     const $columnDelete = $('<button>').addClass('btn-delete').text('X');
     const $columnAddCard = $('<button>').addClass('add-card').text('Add a card');
+
+    // DELETE COLUMN EVENT
+    $columnDelete.click(function() {
+      self.removeColumn();
+    });
+
+    // ADD COLUMN EVENT
+    $columnAddCard.click(function() {
+      self.addCard(new Card(prompt('Enter the name of the card')));
+    });
   }
 
 }) // END $(document).ready()
