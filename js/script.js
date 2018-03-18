@@ -15,9 +15,33 @@ $(function() {
   // COLUMN CONSTRUCTOR
   function Column(name) {
     let self = this; //or const?
-    this.id = randomString();
+    this.id = randomString(); //todoColumn.id ?
     this.name = name;
     this.$element = createColumn();
+    // CREATE COLUMN FUNCTION
+    function createColumn() {
+      // COLUMN ELEMENTS
+      const $column = $('<div>').addClass('column'); // TWORZY PUSTY DIV O KLASIE 'column'? NIE POTRZEBNE ZAMKNIĘCIE?
+      const $columnTitle = $('<h2>').addClass('column-title').text(self.name);
+      const $columnCardList = $('<ul>').addClass('column-card-list');
+      const $columnDelete = $('<button>').addClass('btn-delete').text('X');
+      const $columnAddCard = $('<button>').addClass('add-card').text('Add a card');
+      // DELETE COLUMN EVENT
+      $columnDelete.click(function () {
+        self.removeColumn();
+      });
+      // ADD COLUMN EVENT
+      $columnAddCard.click(function () {
+        self.addCard(new Card(prompt('Enter the name of the card')));
+      });
+      // APPEND COLUMN ELEMENTS
+      $column.append($columnTitle);
+      $column.append($columnAddCard);
+      $column.append($columnDelete);
+      $column.append($columnCardList);
+      // RETURN CREATED COLUMN
+      return $column;
+    }
   }
 
   // COLUMN PROTOTYPES
@@ -27,31 +51,6 @@ $(function() {
 
   Column.prototype.removeColumn = function() {
     this.$element.remove();
-  }
-
-  // CREATE COLUMN FUNCTION
-  function createColumn() {
-    // COLUMN ELEMENTS
-    const $column = $('<div>').addClass('column');
-    const $columnTitle = $('<h2>').addClass('column-title').text(self.name);
-    const $columnCardList = $('<ul>').addClass('column-card-list');
-    const $columnDelete = $('<button>').addClass('btn-delete').text('X');
-    const $columnAddCard = $('<button>').addClass('add-card').text('Add a card');
-    // DELETE COLUMN EVENT
-    $columnDelete.click(function() {
-      self.removeColumn();
-    });
-    // ADD COLUMN EVENT
-    $columnAddCard.click(function() {
-      self.addCard(new Card(prompt('Enter the name of the card')));
-    });
-    // APPEND COLUMN ELEMENTS
-    $column.append($columnTitle);
-    $column.append($columnAddCard);
-    $column.append($columnDelete);
-    $column.append($columnCardList);
-    // RETURN CREATED COLUMN
-    return $column;
   }
 
   //CARD CONSTRUCTOR
@@ -127,3 +126,5 @@ $(function() {
   doingColumn.addCard(card2);
 
 }); // END $(document).ready()
+
+// NIE DZIAŁA PRZENOSZENIE DO DONE !
