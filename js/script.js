@@ -105,4 +105,23 @@ $(function() {
     board.addColumn(column); // ?
   });
 
+  // ADD BASIC ELEMENTS
+  // CREATING COLUMNS
+  const todoColumn = new Column('To do');
+  const doingColumn = new Column('Doing');
+  const doneColumn = new Column('Done');
+
+  // ADDING COLUMNS TO THE BOARD
+  board.addColumn(todoColumn);
+  board.addColumn(doingColumn);
+  board.addColumn(doneColumn);
+
+  // CREATING CARDS
+  const card1 = new Card('New task');
+  const card2 = new Card('Create kanban boards');
+
+  // ADDING CARDS TO COLUMNS
+  todoColumn.addCard(card1);
+  doingColumn.addCard(card2);
+
 }); // END $(document).ready()
