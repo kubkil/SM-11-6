@@ -9,4 +9,11 @@
   justify-content: space-around;
   border: 1px solid black; }
 
+h1, h2 {
+  text-transform: uppercase;
+  text-align: center; }
+
+.column {
+  background-color: lightblue; }
+
 /*# sourceMappingURL=style.css.map */
