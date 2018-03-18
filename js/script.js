@@ -10,19 +10,22 @@ $(function() {
     return str;
   }
 
+  // COLUMN CONSTRUCTOR
   function Column(name) {
     let self = this; //or const?
     this.id = randomString();
     this.name = name;
     this.$element = createColumn();
 
-    // CREATE COLUMN FUNCTION
-    function createColumn() {
-      const $column = $('<div>').addClass('column');
-      const $columnTitle = $('<h2>').addClass('column-title').text(self.name);
-      const $columnCardList = $('<ul>').addClass('column-card-list');
-      const $columnDelete = $('<button>')
-    }
+  }
+
+  // CREATE COLUMN FUNCTION
+  function createColumn() {
+    const $column = $('<div>').addClass('column');
+    const $columnTitle = $('<h2>').addClass('column-title').text(self.name);
+    const $columnCardList = $('<ul>').addClass('column-card-list');
+    const $columnDelete = $('<button>').addClass('btn-delete').text('X');
+    const $columnAddCard = $('<button>').addClass('add-card').text('Add a card');
   }
 
 }) // END $(document).ready()
