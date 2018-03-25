@@ -16,4 +16,7 @@ h1, h2 {
 .column {
   background-color: lightblue; }
 
+.column-card-list {
+  min-height: 100px; }
+
 /*# sourceMappingURL=style.css.map */
