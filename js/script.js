@@ -13,25 +13,26 @@ $(function() {
   }
 
   // COLUMN CONSTRUCTOR
-  function Column(name) {
-    let self = this; //or const?
-    this.id = randomString(); //todoColumn.id ?
+  function Column(name) { //
+    const self = this; //const bo nie zmienia się w tym kontekście, jest const tylko dla tej funkcji
+    this.id = randomString(); //
     this.name = name;
-    this.$element = createColumn();
+    this.$element = createColumn(); //$element - wskazuje na element jquery (konwencja nazywania); wywołuje createColumn();
     // CREATE COLUMN FUNCTION
-    function createColumn() {
+    function createColumn() { //tworzy htmla
       // COLUMN ELEMENTS
-      const $column = $('<div>').addClass('column'); // TWORZY PUSTY DIV O KLASIE 'column'? NIE POTRZEBNE ZAMKNIĘCIE <>? ZNAK $ PRZED NAZWĄ ZMIENNEJ W CELU OZNACZENIA ZMIENNEJ TRZYMAJĄCEJ ELEMENT JQUERY
+      const $column = $('<div>').addClass('column'); // TWORZY PUSTY DIV O KLASIE 'column'. NIE POTRZEBNE ZAMKNIĘCIE <>. ZNAK $ PRZED NAZWĄ ZMIENNEJ W CELU OZNACZENIA ZMIENNEJ TRZYMAJĄCEJ ELEMENT JQUERY > zamyka automatycznie - dodawany w linii 89 append
       const $columnTitle = $('<h2>').addClass('column-title').text(self.name);
       const $columnCardList = $('<ul>').addClass('column-card-list');
+      // const $columnLi = $columnCardList.append($('<li>'));
       const $columnDelete = $('<button>').addClass('btn-delete').text('X');
       const $columnAddCard = $('<button>').addClass('add-card').text('Add a card');
       // DELETE COLUMN EVENT
-      $columnDelete.click(function () {
+      $columnDelete.click(function() {
         self.removeColumn();
       });
       // ADD COLUMN EVENT
-      $columnAddCard.click(function () {
+      $columnAddCard.click(function() {
         self.addCard(new Card(prompt('Enter the name of the card')));
       });
       // APPEND COLUMN ELEMENTS
@@ -40,7 +41,7 @@ $(function() {
       $column.append($columnAddCard);
       $column.append($columnCardList);
       // RETURN CREATED COLUMN
-      return $column;
+      return $column; //to co zwrócone przechowywane w 20 this.$element > zwraca $column z 24 linii ze wszystkim w środku
     }
   }
 
@@ -51,11 +52,11 @@ $(function() {
 
   Column.prototype.removeColumn = function() {
     this.$element.remove();
-  }
+  } // koniec obiektu Column, prototypy wchodzą do obiektu
 
   //CARD CONSTRUCTOR
   function Card(description) {
-    let self = this; // or const?
+    const self = this; // or const?
     this.id = randomString();
     this.description = description;
     this.$element = createCard();
@@ -79,13 +80,13 @@ $(function() {
   // CARD PROTOTYPE
   Card.prototype.removeCard = function() {
     this.$element.remove();
-  }
+  } // koniec obiektu card
 
   // BOARD OBJECT
   const board = {
     name: 'Kanban Board',
     addColumn: function(column) {
-      this.$element.append(column.$element);
+      this.$element.append(column.$element); // dodaje kolumnę -> todoColumn.$element z linii 20 na przykład
       initSortable();
     },
     $element: $('#board .column-container')
@@ -101,19 +102,19 @@ $(function() {
 
   // EVENT ON .create-column
   $('.create-column').click(function() {
-    let name = prompt('Enter column name'); // or const?
-    let column = new Column(name);
+    const name = prompt('Enter column name'); //
+    const column = new Column(name); // let i = ab(); wywołanie funkcji i przypisanie wyniku do i; nawiasy powoduję wywołanie nawet gdy przypisanie do zmiennej
     board.addColumn(column); // ?
   });
 
   // ADD BASIC ELEMENTS
   // CREATING COLUMNS
-  const todoColumn = new Column('To do');
-  const doingColumn = new Column('Doing');
-  const doneColumn = new Column('Done');
+  const todoColumn = new Column('To do'); // do 16 linii tworzą obiekty
+  const doingColumn = new Column('Doing'); // jw
+  const doneColumn = new Column('Done'); // jw
 
   // ADDING COLUMNS TO THE BOARD
-  board.addColumn(todoColumn);
+  board.addColumn(todoColumn); // addColumn jedna z właściwości obiektu, odwołanie do metody addColumn, tutaj jeszcze string name i $element (property mogą być wszystkim); wywołanie funkcji odpowiadającej za dodanie kolumny todo
   board.addColumn(doingColumn);
   board.addColumn(doneColumn);
 
