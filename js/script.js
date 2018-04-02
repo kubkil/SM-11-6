@@ -13,18 +13,20 @@ $(function() {
   }
 
   // COLUMN CONSTRUCTOR
-  function Column(name) { //
-    const self = this; //const bo nie zmienia się w tym kontekście, jest const tylko dla tej funkcji
+  function Column(name) {
+    // const no nie zmienia się w tym kontekście
+    const self = this;
     this.id = randomString(); //
     this.name = name;
-    this.$element = createColumn(); //$element - wskazuje na element jquery (konwencja nazywania); wywołuje createColumn();
+    // $element - $ wskazuje na element jQuery; wywołuje funkcję i przypisuje wynik do this.$element
+    this.$element = createColumn();
     // CREATE COLUMN FUNCTION
-    function createColumn() { //tworzy htmla
+    function createColumn() {
       // COLUMN ELEMENTS
-      const $column = $('<div>').addClass('column'); // TWORZY PUSTY DIV O KLASIE 'column'. NIE POTRZEBNE ZAMKNIĘCIE <>. ZNAK $ PRZED NAZWĄ ZMIENNEJ W CELU OZNACZENIA ZMIENNEJ TRZYMAJĄCEJ ELEMENT JQUERY > zamyka automatycznie - dodawany w linii 89 append
+      // zamknięcie </div> nie potrzebne, zamyka automatycznie
+      const $column = $('<div>').addClass('column');
       const $columnTitle = $('<h2>').addClass('column-title').text(self.name);
       const $columnCardList = $('<ul>').addClass('column-card-list');
-      // const $columnLi = $columnCardList.append($('<li>'));
       const $columnDelete = $('<button>').addClass('btn-delete').text('X');
       const $columnAddCard = $('<button>').addClass('add-card').text('Add a card');
       // DELETE COLUMN EVENT
@@ -36,12 +38,13 @@ $(function() {
         self.addCard(new Card(prompt('Enter the name of the card')));
       });
       // APPEND COLUMN ELEMENTS
-      $column.append($columnTitle); //O CO CHODZI W KODZIE Z INSTRUKCJI W TYM FRAGMENCIE?
+      $column.append($columnTitle);
       $column.append($columnDelete);
       $column.append($columnAddCard);
       $column.append($columnCardList);
       // RETURN CREATED COLUMN
-      return $column; //to co zwrócone przechowywane w 20 this.$element > zwraca $column z 24 linii ze wszystkim w środku
+      // wynik return przechowywany w this.$element
+      return $column;
     }
   }
 
@@ -52,11 +55,12 @@ $(function() {
 
   Column.prototype.removeColumn = function() {
     this.$element.remove();
-  } // koniec obiektu Column, prototypy wchodzą do obiektu
+    // koniec konstruktora column
+  }
 
   //CARD CONSTRUCTOR
   function Card(description) {
-    const self = this; // or const?
+    const self = this;
     this.id = randomString();
     this.description = description;
     this.$element = createCard();
@@ -80,13 +84,14 @@ $(function() {
   // CARD PROTOTYPE
   Card.prototype.removeCard = function() {
     this.$element.remove();
-  } // koniec obiektu card
+    // koniec obiektu card
+  }
 
   // BOARD OBJECT
   const board = {
     name: 'Kanban Board',
     addColumn: function(column) {
-      this.$element.append(column.$element); // dodaje kolumnę -> todoColumn.$element z linii 20 na przykład
+      this.$element.append(column.$element);
       initSortable();
     },
     $element: $('#board .column-container')
@@ -103,18 +108,19 @@ $(function() {
   // EVENT ON .create-column
   $('.create-column').click(function() {
     const name = prompt('Enter column name'); //
-    const column = new Column(name); // let i = ab(); wywołanie funkcji i przypisanie wyniku do i; nawiasy powoduję wywołanie nawet gdy przypisanie do zmiennej
-    board.addColumn(column); // ?
+    // wywołuje funkcję i przypisuje wynik do zmiennej column
+    const column = new Column(name);
+    board.addColumn(column); //
   });
 
   // ADD BASIC ELEMENTS
   // CREATING COLUMNS
-  const todoColumn = new Column('To do'); // do 16 linii tworzą obiekty
-  const doingColumn = new Column('Doing'); // jw
-  const doneColumn = new Column('Done'); // jw
+  const todoColumn = new Column('To do');
+  const doingColumn = new Column('Doing');
+  const doneColumn = new Column('Done');
 
   // ADDING COLUMNS TO THE BOARD
-  board.addColumn(todoColumn); // addColumn jedna z właściwości obiektu, odwołanie do metody addColumn, tutaj jeszcze string name i $element (property mogą być wszystkim); wywołanie funkcji odpowiadającej za dodanie kolumny todo
+  board.addColumn(todoColumn);
   board.addColumn(doingColumn);
   board.addColumn(doneColumn);
 
@@ -127,5 +133,3 @@ $(function() {
   doingColumn.addCard(card2);
 
 }); // END $(document).ready()
-
-// NIE DZIAŁA PRZENOSZENIE DO DONE !
